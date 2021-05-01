@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Delayed Event Processing - Part 2
+tags:
+  - aws
+  - serverless
+  - events
 ---
 
 In my [previous post](../delayed-event-processing-part-1) I showed you how you can handle multiple events but only trigger downstream processes in batches. There was one catch to that processing; everything was delayed. What if you want to respond immediately to the first event, but then delay the next time you process until at least some time has passed? Today I'll expand upon the previous post to do just that.

@@ -1,6 +1,12 @@
 ---
 layout: post
 title: Using Step Functions to Eliminate Your NAT Gateway
+tags:
+  - aws
+  - serverless
+  - Step Functions
+  - NAT Gateway
+  - cost
 ---
 
 I love serverless, for a lot of reasons. One huge benefit is the cost; if you’re not using it you aren’t paying for it. So, it bothers me whenever I find a need to have some bit of infrastructure that I have to pay for all the time. If you run your lambdas inside a VPC you may know what I’m talking about (also, the title of the article might have given it away). NAT gateways are a necessary evil when your function needs to talk to anything outside the VPC. Or are they?

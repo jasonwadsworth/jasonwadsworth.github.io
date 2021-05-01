@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Delayed Event Processing - Part 1
+tags:
+  - aws
+  - serverless
+  - events
 ---
 
 Processing event data is a basic concept in today's cloud based architectures. We recently came across a situation where processing EVERY event was too much. Imagine if you are running radar and someone is exceeding the speed limit. The radar is constantly reporting the speed, and that speed may even change, but you really only need to take one action; pull the driver over and write a ticket. So how did we do this?

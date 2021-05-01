@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Stop Using GUIDs for Identifiers
+tags:
+  - guid
+  - uuid
+  - identifiers
 ---
 
 A number of years ago I started a job at a company that was just starting their move into the cloud. Shortly before I arrived there was a rather heated debate, from what I've heard, about whether identifiers should be integers (auto numbered specifically) or GUIDs. By the time I arrived the decision had been made to use integers. I quickly stepped in and pointed out all the problems this has in distributed systems and we, mostly, switched to GUIDs. That wasn't the right choice.

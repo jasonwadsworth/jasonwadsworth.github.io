@@ -1,6 +1,11 @@
 ---
 layout: post
 title: Cross Account, Cross Region, Pipeline in AWS
+tags:
+  - aws
+  - ci/cd
+  - CloudFormation
+  - CodePipeline
 ---
 
 [AWS](https://aws.amazon.com/) introduced a simple tool for deploying services several years ago, called [CodePipeline](https://aws.amazon.com/codepipeline/). Since then they've done a lot to make it more powerful. This blog will show you how to take advantage of the power of CodePipeline to build a cross account, cross region pipeline.

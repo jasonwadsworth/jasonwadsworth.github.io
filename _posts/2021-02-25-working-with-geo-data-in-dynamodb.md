@@ -1,6 +1,12 @@
 ---
 layout: post
 title: Working With Geo Data In DynamoDB
+tags:
+  - aws
+  - serverless
+  - DynamoDB
+  - geo
+  - geohash
 ---
 
 If you find yourself needing to work with Geo data you might find yourself reaching for tools like ElasticSearch, or your favorite SQL database, to allow for geospatial searching. If you love DynamoDB as much as I do you cringe whenever you have to leave the comfort of the scale, performance, and availability of DynamoDB. In this article I'll show you how you can use DynamoDB for Geo data, so you don't have to resort to those other databases.

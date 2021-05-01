@@ -1,6 +1,11 @@
 ---
 layout: post
 title: Auto Updating Developer Pipeline
+tags:
+  - aws
+  - ci/cd
+  - CloudFormation
+  - CodePipeline
 ---
 
 In my [previous blog post](../cross-account-cross-region-pipeline) I showed you how to create a cross account, cross region pipeline with CodePipeline. Today I'll show you how to extend that pipeline so that your developers can have there own pipelines whilst also staying up to date on the latest changes.

@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Does the grass need to be greener?
+tags:
+  - workspace
+  - wellness
+  - wellbeing
 ---
 
 I was talking to a colleague one day who was unhappy with some elements of his job, or, more specifically, some elements of the environment. The conversation went about like you’d expect, with some thoughts about what was wrong and how it should be. These conversations are important to have because it helps me understand what makes people tick, what they like about their job, and what they don’t. It helps define what changes, if any, need to be made organizationally.
