@@ -53,7 +53,7 @@ The following integrations asynchronously invoke your Lambda function.
 
 ### Synchronous Invocations
 
-For [synchronous invocations](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-sync.html) you won't get a DLQ or error destination at the function itself. For these integrations it's up to the caller to handle retries and errors, so you may get retries and DLQs in some cases, but not other.
+For [synchronous invocations](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-sync.html) you won't get a DLQ or error destination at the function itself. For these integrations it's up to the caller to handle retries and errors, so you may get retries and DLQs in some cases, but not others.
 
 > When you invoke a function synchronously, Lambda runs the function and waits for a response. When the function completes, Lambda returns the response from the function's code with additional data, such as the version of the function that was invoked.
 
