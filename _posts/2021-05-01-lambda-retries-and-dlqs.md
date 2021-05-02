@@ -17,7 +17,7 @@ To make this easier to use quickly I'm including a quick reference table for eac
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Up to 2 | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Yes | ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Yes |
+| ✅ Up to 2 | ❌ No | ✅ Yes | ✅ Yes |
 
 I'll do my best to include more information when necessary.
 
@@ -29,7 +29,9 @@ There are two ways to invoke a Lambda function. The type of invocation is key to
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Up to 2 | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Yes | ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Yes |
+| ✅ Up to 2 | ❌ No | ✅ Yes | ✅ Yes |
+
+
 
 All [asynchronous invocations](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-async.html) will retry a message up to two times (default). You can use a DLQ on the function, and/or an error destination. Asynchronous invocations do not support DLQs at the integration because the integration returns immediately after Lambda has received the request. The requests are placed in an internal queue that is managed by Lambda.
 
@@ -63,7 +65,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Some | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ Some | ❌ No | ❌ No | ❌ No |
 
 [CLI & SDK](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-retries.html) invocations can call your function either synchronously or asynchronously. There are some limited cases where the call will be retried, but exceptions thrown by your code will not lead to a retry.
 
@@ -71,7 +73,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![No](https://via.placeholder.com/15/d10202/000000?text=+) None | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ❌ None | ❌ No | ❌ No | ❌ No |
 
 [API Gateway](https://docs.aws.amazon.com/Lambda/latest/dg/services-apigateway.html) invokes your function synchronously. There are no retries when making calls to your function, and the integration does not support a DLQ.
 
@@ -79,7 +81,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) 2 | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ 2 | ❌ No | ❌ No | ❌ No |
 
 [Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-Lambda-triggers.html) invokes your function synchronously except for custom sender triggers.
 
@@ -89,7 +91,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Until Expired* | ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Yes | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ Until Expired* | ✅ Yes | ❌ No | ❌ No |
 
 [DynamoDB Streams](https://docs.aws.amazon.com/Lambda/latest/dg/with-ddb.html) invoke your function synchronously in batches. If the function returns an error or times out the entire batch will be retried until the message expires by default. The integration is an [event source mapping](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-eventsourcemapping.html), which includes several configuration options to control retries and DLQs. Although the Lambda console does make it seem as though you can configure an error destination, that configuration is really part of the event source mapping.
 
@@ -101,7 +103,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ❌ No | ❌ No | ❌ No | ❌ No |
 
 [Application Load Balancer](https://docs.aws.amazon.com/Lambda/latest/dg/services-alb.html) invokes your function synchronously. There are no retries when making calls to your function, and the integration does not support a DLQ.
 
@@ -109,7 +111,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) User controlled | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ User controlled | ❌ No | ❌ No | ❌ No |
 
 [Kinesis Firehose](https://docs.aws.amazon.com/firehose/latest/dev/data-transformation.html) calls your function synchronously. There are options within the integration to control the number of retries. There is no option for a DLQ.
 
@@ -117,7 +119,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Until Expired* | ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Yes | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ Until Expired* | ✅ Yes | ❌ No | ❌ No |
 
 [Kinesis Streams](https://docs.aws.amazon.com/Lambda/latest/dg/with-kinesis.html) invoke your function synchronously in batches. If the function returns an error or times out the entire batch will be retried until the message expires by default. The integration is an [event source mapping](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-eventsourcemapping.html), which includes several configuration options to control retries and DLQs.
 
@@ -129,7 +131,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![No](https://via.placeholder.com/15/d10202/000000?text=+) None | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ❌ None | ❌ No | ❌ No | ❌ No |
 
 [Lex](https://docs.aws.amazon.com/Lambda/latest/dg/services-lex.html) invokes your function synchronously. There are no retries when making calls to your function, and the integration does not support a DLQ.
 
@@ -137,7 +139,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![No](https://via.placeholder.com/15/d10202/000000?text=+) None | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ❌ None | ❌ No | ❌ No | ❌ No |
 
 [Amazon MQ](https://docs.aws.amazon.com/Lambda/latest/dg/with-mq.html) invokes your function synchronously. The integration is an [event source mapping](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-eventsourcemapping.html), but does not include any settings for DLQ or retries. Those can be handled within [ActiveMQ](https://activemq.apache.org/message-redelivery-and-dlq-handling) itself.
 
@@ -145,7 +147,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Yes | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ Yes | ❌ No | ❌ No | ❌ No |
 
 [S3 Batch](https://docs.aws.amazon.com/Lambda/latest/dg/services-s3-batch.html) invokes your function synchronously. There is no option for a DLQ. If the Lambda function returns a `TemporaryFailure` response code, Amazon S3 retries the operation.
 
@@ -153,7 +155,7 @@ Here is a list of each integration and how its retries and DLQs work.
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Configured in SQS | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ Configured in SQS | ❌ No | ❌ No | ❌ No |
 
 [SQS](https://docs.aws.amazon.com/Lambda/latest/dg/with-sqs.html) invokes your function synchronously. The integration is an [event source mapping](https://docs.aws.amazon.com/Lambda/latest/dg/invocation-eventsourcemapping.html), however, no DLQ or retry options are available on the integration itself. Instead, you configure a redrive policy on the queue itself. This policy controls how many times a message can be received before being discarded or sent to a DLQ.
 
@@ -163,6 +165,6 @@ SQS also handles throttling in a rather unique way. Because the queue management
 
 |Retries|DLQ at integration|DLQ at function|Error destination at function|
 |-------|------------------|---------------|-----------------------------|
-| ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Controlled in retry configuration | ![Yes](https://via.placeholder.com/15/02a636/000000?text=+) Controlled as a state | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No | ![No](https://via.placeholder.com/15/d10202/000000?text=+) No |
+| ✅ Controlled in retry configuration | ✅ Controlled as a state | ❌ No | ❌ No |
 
 [Step Functions](https://docs.aws.amazon.com/Lambda/latest/dg/API_Invoke.html) can invoke a Lambda synchronously. When doing so you can use the [retry](https://states-language.net/spec.html#retrying-after-error) setting to control the retries. Any error logic can be handled in the state machine using the [catch](https://states-language.net/spec.html#fallback-states) setting and sending the message to an SQS queue or SNS topic within the state machine itself.
