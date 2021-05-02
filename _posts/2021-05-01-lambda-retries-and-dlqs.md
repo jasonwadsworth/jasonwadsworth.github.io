@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lambda Retries and DLQs
+title: Lambda Retries and Dead Letter Queues
 tags:
   - aws
   - serverless
