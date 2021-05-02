@@ -290,9 +290,11 @@ footer {
 
 th {
     padding-right: 5px;
+    border: 1px solid $darkerGray;
 }
 
 td {
     padding-right: 5px;
     text-align: center;
+    border: 1px solid $darkGray;
 }
