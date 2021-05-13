@@ -54,7 +54,7 @@
                             {{ site.name }}
                         </div>
                         <div class="text-center">
-                            {{ site.description }}
+                            {% if page.title %}{{ page.title }}{% else %}{{ site.description }}{% endif %}
                         </div>
                     </div>
                 </div>
