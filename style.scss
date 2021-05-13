@@ -18,9 +18,9 @@ html {
 }
 
 body {
-	background: $white;
-  font: 18px/1.4 $helvetica;
-  color: $darkGray;
+  background: $white;
+  font: 18px/1.4 'Raleway';
+  color: $primary;
 }
 
 .container {
@@ -31,8 +31,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $helveticaNeue;
-  color: $darkerGray;
+  font-family: 'Raleway';
+  color: $primary;
   font-weight: bold;
 
   line-height: 1.7;
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 36px;
   a {
     color: inherit;
   }
@@ -61,7 +61,7 @@ h3 {
 
 h4 {
   font-size: 18px;
-  color: $gray;
+  color: $tertiary;
 }
 
 p {
@@ -69,11 +69,11 @@ p {
 }
 
 a {
-  color: $blue;
+  color: $accent;
   text-decoration: none;
 	cursor: pointer;
   &:hover, &:active {
-    color: $blue;
+    color: $accent;
   }
 }
 
@@ -117,17 +117,17 @@ img {
 
 .date {
   font-style: italic;
-  color: $gray;
+  color: $secondary;
 }
 
 // Specify the color of the selection
 ::-moz-selection {
-  color: $black;
-  background: $lightGray;
+  color: $primary;
+  background: $tertiary;
 }
 ::selection {
-  color: $black;
-  background: $lightGray;
+  color: $primary;
+  background: $tertiary;
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -155,12 +155,27 @@ img {
 }
 
 .masthead {
+  background-image: url('images/home-header-kc-navy-1600x593.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid $tertiary;
 
   @include mobile {
     text-align: center;
   }
+}
+
+.header-box {
+    text-align: left;
+    padding: 34px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 40px;
+    border: $accent solid 4px;
+    line-height: 40px;
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .site-avatar {
@@ -192,9 +207,9 @@ img {
 
 .site-name {
   margin: 0;
-  color: $darkGray;
+  color: $primary;
   cursor: pointer;
-  font-family: $helveticaNeue;
+  font-family: 'Raleway';
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 1px;
@@ -202,7 +217,7 @@ img {
 
 .site-description {
   margin: -5px 0 0 0;
-  color: $gray;
+  color: $secondary;
   font-size: 16px;
 
   @include mobile {
@@ -213,7 +228,7 @@ img {
 nav {
   float: right;
   margin-top: 23px; // @TODO: Vertically middle align
-  font-family: $helveticaNeue;
+  font-family: 'Raleway';
   font-size: 18px;
 
   @include mobile {
@@ -225,14 +240,14 @@ nav {
 
   a {
     margin-left: 20px;
-    color: $darkGray;
+    color: $primary;
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
 
     @include mobile {
       margin: 0 10px;
-      color: $blue;
+      color: $accent;
     }
   }
 }
@@ -243,7 +258,8 @@ nav {
 
 .posts > .post {
   padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid $tertiary;
+  text-align: left;
 }
 
 .posts > .post:last-child {
@@ -254,9 +270,9 @@ nav {
 .post {
   blockquote {
     margin: 1.8em .8em;
-    border-left: 2px solid $gray;
+    border-left: 2px solid $secondary;
     padding: 0.1em 1em;
-    color: $gray;
+    color: $secondary;
     font-size: 22px;
     font-style: italic;
   }
@@ -275,7 +291,7 @@ nav {
   margin-top: 50px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
+  background-color: $white;
 }
 
 footer {
@@ -290,11 +306,274 @@ footer {
 
 th {
     padding-right: 5px;
-    border: 1px solid $darkerGray;
+    border: 1px solid $primary;
 }
 
 td {
     padding-right: 5px;
     text-align: center;
-    border: 1px solid $darkGray;
+    border: 1px solid $primary;
+}
+
+body {
+    font-family: 'Raleway';
+    color: #ffffff;
+    font-variant-numeric: lining-nums;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: $accent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: $accent;
+    text-decoration: none;
+}
+
+.cloud913-primary {
+    color: #1a3a6b;
+}
+
+.cloud913-secondary {
+    color: #2d4566;
+}
+
+.cloud913-tertiary {
+    color: #3d5470;
+}
+
+.cloud913-fourth {
+    color: #4d6987;
+}
+
+.cloud913-fifth {
+    color: #577699;
+}
+
+.cloud913-accent {
+    color: #de713a;
+}
+
+.header-top {
+    background-color: rgb(40, 40, 40);
+    height: 40px;
+}
+
+.header-top>a>img {
+    height: 34px;
+    display: block;
+    margin-left: 3px;
+}
+
+.header-accent {
+    background-color: #de713a;
+    height: 2px;
+}
+
+.header-main {
+    background-image: url('images/home-header-kc-navy-1600x593.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.header-nav {
+    padding-top: 10px;
+}
+
+.header-nav a {
+    font-weight: 200;
+    font-size: 20px;
+    font-style: normal;
+    letter-spacing: 5px;
+    color: #ffffff;
+}
+
+.header-box {
+    text-align: left;
+    padding: 34px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 40px;
+    border: #de713a solid 4px;
+    line-height: 40px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.welcome {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 80px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.welcome-image {
+    height: 40px;
+    margin: -12px 0 0 4px;
+}
+
+article {
+    color: #1a3a6b;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+article * a {
+    color: #1a3a6b;
+    text-decoration: underline;
+}
+
+article * a:visited {
+    color: #1a3a6b;
+}
+
+article * a:hover {
+    color: $accent;
+}
+
+footer {
+    color: #577699;
+    font-size: 14px;
+}
+
+.footer-accent {
+    background-color: #de713a;
+    height: 2px;
+    margin-bottom: 6px;
+}
+
+footer * img {
+    height: 60px;
+    margin-top: 10px;
+}
+
+footer * a {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+footer * a:visited {
+    color: #577699;
+}
+
+.copyright {
+    margin-top: 10px;
+}
+
+.nav-button {
+    margin-top: -10px;
+    border-radius: 5px;
+    padding: 2px;
+    margin-right: -20px;
+}
+
+.nav-button>img {
+    height: 24px;
+}
+
+.nav-button .icon-bar {
+    background-color: #de713a;
+}
+
+.call-913 {
+    height: 20px;
+    margin-top: -5px;
+}
+@media screen and (min-width: 768px) {
+    .header-nav a {
+        margin: 20px 20px;
+        font-weight: 200;
+        font-size: 20px;
+        font-style: normal;
+        letter-spacing: 5px;
+        color: #ffffff;
+    }
+
+
+    .header-box {
+        text-align: left;
+        padding: 60px;
+        margin: auto;
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-top: 15px;
+        margin-bottom: 50px;
+        border: #de713a solid 4px;
+        line-height: 80px;
+        font-size: 48px;
+        font-weight: 400;
+    }
+
+    .welcome {
+        font-size: 80px;
+        font-weight: 600;
+        line-height: 100px;
+        text-align: center;
+    }
+
+    .welcome-image {
+        height: 80px;
+        margin: -20px 0 0 4px;
+    }
+
+    article {
+        margin-top: 30px;
+    }
+
+    .call-913 {
+        height: 24px;
+        margin-top: -6px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .header-nav a {
+        margin: 30px 30px;
+        font-weight: 200;
+        font-size: 30px;
+        font-style: normal;
+        letter-spacing: 5px;
+        color: #ffffff;
+    }
+
+    .header-box {
+        text-align: left;
+        padding: 80px;
+        padding-top: 120px;
+        margin: auto;
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-top: 15px;
+        margin-bottom: 80px;
+        border: #de713a solid 4px;
+        line-height: 80px;
+        font-size: 48px;
+        font-weight: 400;
+    }
+
+    .welcome {
+        font-size: 80px;
+        font-weight: 600;
+        line-height: 100px;
+        text-align: center;
+    }
+
+    .welcome-image {
+        height: 80px;
+        margin: -20px 0 0 4px;
+    }
+
+    article {
+        font-size: 24px;
+        // margin-top: 60px;
+        // margin-bottom: 160px;
+    }
 }

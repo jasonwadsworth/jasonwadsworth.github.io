@@ -12,7 +12,6 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.typekit.net/egl4kql.css">
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}"
         href="{{ site.baseurl }}/feed.xml" />
@@ -52,9 +51,6 @@
                         <div class="welcome text-center">
                             {{ site.name }}
                         </div>
-                        <div class="text-center">
-                            {{ site.description }}
-                        </div>
                     </div>
                 </div>
             </div>
@@ -77,12 +73,11 @@
     <div class="wrapper-footer">
         <div class="container">
             <footer class="footer">
+                {% include svg-icons.html %}
+
+
                 <div class="col-xs-12 col-md-4">
-                    <a href="https://cloud913.com"><img src="{{ site.baseurl }}/images/logotype-long-blue.svg"
-                            alt="Cloud913 Logo Type - Long - Blue"></a>
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    {% include svg-icons.html %}
+                    <img src="{{ site.baseurl }}/images/logotype-long-blue.svg" alt="Cloud913 Logo Type - Long - Blue">
                 </div>
                 <div class="col-xs-12 col-md-4 copyright">
                     Copyright 2021, Cloud913 LLC
@@ -92,13 +87,6 @@
     </div>
 
     {% include analytics.html %}
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
