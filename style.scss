@@ -49,6 +49,7 @@ h1 {
   a {
     color: inherit;
   }
+  margin-top: 0px;
 }
 
 h2 {
@@ -118,6 +119,10 @@ img {
 .date {
   font-style: italic;
   color: $secondary;
+}
+
+.date small {
+    font-size: 10pt;
 }
 
 // Specify the color of the selection
