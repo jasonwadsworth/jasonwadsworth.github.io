@@ -50,11 +50,20 @@
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
                     <div class="header-box text-center">
                         <div class="welcome text-center">
+                            {% if page.title %}
+                            {{ page.title }}
+                            {% else %}
                             <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-                            {{ site.name }}
+                            {{site.name }}
+                            {% endif %}
                         </div>
                         <div class="text-center">
-                            {% if page.title %}{{ page.title }}{% else %}{{ site.description }}{% endif %}
+                            {% if page.title %}
+                            <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+                            {{site.name }}
+                            {% else %}
+                            {{ site.description }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
