@@ -16,9 +16,6 @@ The first, and most common, way to deal with hierarchy data in DynamoDB is what 
 
 We'll start with a simple folder structure. Imagine you have some data that is something like this:
 
-<details open>
-  <summary>Example data</summary>
-
 ```text
   Drive C
     Folder I
@@ -37,12 +34,7 @@ We'll start with a simple folder structure. Imagine you have some data that is s
       Folder e
 ```
 
-</details>
-
 When storing this data in DynamoDB you would include the full path of each item with that item. You might have a table that looks something like this:
-
-<details open>
-  <summary>Data with hierarchy data field</summary>
 
 | ID | Root | Path | Folder Name
 | -- | ------ | ------ | -----------
@@ -61,8 +53,6 @@ When storing this data in DynamoDB you would include the full path of each item 
 | ii | D | /V/d/ | Folder ii
 | iii | D | /V/d/ | Folder iii
 | e | D | /V/ | Folder e
-
-</details>
 
 With the data in this format, you can get any single folder by its ID. You can list all folders directly under a folder by using the GSI (which will be the `Root` and the `Path`) and specifying the root and the path. You can also get all folders below a folder (all the way down the tree) by using the GSI and specifying the root and that the path `begins_with` the path of the folder.
 
@@ -148,9 +138,6 @@ This one isn't a slam dunk, and there are even some cases where it might not be 
 
 Okay, let's get into how it works. At its core is one simple thing; every record needs to have a copy made for each node above it in the hierarchy. The data will include some extra information, specifically the relative depth and the id of the ancestor item. Using the above data, you'd end up with records like this:
 
-<details open>
-  <summary>Example data for replicated data</summary>
-
 | ID | Ancestor ID | Relative Depth | Folder Name
 | -- | ----------- | -------------- | -----------
 | C | I | 0 | Drive C
@@ -192,7 +179,6 @@ Okay, let's get into how it works. At its core is one simple thing; every record
 | e | e | 0 | Folder e
 | e | V | 1 | Folder e
 | e | D | 2 | Folder e
-</details>
 
 As you can see, there are a lot more records in the table. You'll also notice that each record is smaller than the first example. The `Relative Depth` is a number, so the size of that is fixed, and because we don't have to store the entire hierarchy on each row the extra data of the `Ancestor ID` is smaller than the `Path`, in the first pattern, for most rows.
 
