@@ -6,8 +6,6 @@ tags:
   - serverless
 ---
 
-# State of Serverless
-
 The latest [report on the state of serverless from DataDog](https://www.datadoghq.com/state-of-serverless) was a bit disappointing for me. Here’s why.
 
 There is a lot of talk about what serverless means. There are those who say we shouldn’t gate keep, essentially saying everyone’s opinion matters. There is, of course, truth to that, but at some point we have to come to an agreement about what something means in order to have meaningful conversations. Conversations like “what is the state of serverless?” can’t happen if we don’t have some agreed upon understanding of what serverless is. That is where my disappointment with DataDog’s report lies. They’ve chosen to decide for the community what serverless means, and, in my (and many others) opinion, they’re wrong.
