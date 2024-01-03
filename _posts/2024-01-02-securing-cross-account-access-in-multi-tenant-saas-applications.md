@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Assuming Customer Roles in a Multi-Tenant SaaS Application
+title: Securing Cross-Account Access in Multi-Tenant SaaS Applications
 tags:
   - aws
   - security
@@ -9,11 +9,16 @@ tags:
   - STS
 ---
 
-SaaS applications are a big part of business in today's software landscape. If you're building a SaaS application you probably are aware of the importance of protecting your customer's data from other customers (often referred to as tenants). If you happen to be building an application on AWS that allows your tenants to integrate their AWS account(s) with your application you are probably using the Assume Role API to get temporary credentials for each account (if you're not, you should be). But what are you doing to make sure that role is only being used to connect the correct tenant?
+If you’re building a SaaS solution, it’s critically importance that you protect and isolate your customer's data from other customers (often referred to as tenants). For companies building SaaS on AWS, one aspect of their isolation strategy is to connect the data that resides in tenant-owned AWS account(s) with your SaaS application running in SaaS provider owned AWS accounts.
 
-## The Problem
+AWS recommends using the [AWS Security Token Service (STS) API](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) to make calls to get [temporary credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) for this type of cross-account access. This API leverages [AWS Identity and Access Management (IAM)](https://docs.aws.amazon.com/iam/) roles to provide access between AWS accounts.
 
-If you're using the Assume Role API you are, hopefully, using the external ID as part of the assume role document. This external ID allows you to limit who can assume the role by requiring the caller to supply the external ID during the process of getting temporary credentials. It's a solution to the [Confused Deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html). In a multi-tenant SaaS application, there is yet another problem that can happen.
+But what are you doing to make sure these roles are only being used to connect the correct tenant accounts? In this blog, we examine methods of securing cross-account access using STS to ensure our customers data is secure and isolated.
+
+## Challenges of Assuming Cross-Account Roles
+
+
+If you're using the Assume Role API, hopefully, you are [using an external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) as part of the assume role document. This external ID allows you to limit who can assume the role by requiring the caller to supply the external ID during the process of getting temporary credentials. It's a solution to the [Confused Deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html). In a multi-tenant SaaS application, there is yet another problem that can happen.
 
 Suppose a customer grants your application access to assume a role in their AWS account. They give you the ARN of the role and the external ID and now your application can make calls to gather data from that account (hopefully with well-scoped permissions). According to AWS guidance, the external ID is not a secret, which means it's visible to anyone who can see the assume role policy document and isn't likely stored as a secret by you. Even if it were, secrets have their way of becoming known to the wrong person.
 
