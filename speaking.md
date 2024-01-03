@@ -16,6 +16,6 @@ _Nothing right now, but stay tuned_
 
 [AWS Summit NYC](https://aws.amazon.com/events/summits/new-york/) July, 2023
 
-[AWS Community Day Midwest](https://www.midwestcommunityday.com/) June, 2023
+[AWS Community Day Midwest](https://www.midwestcommunityday.com/) June, 2023 - [View Recording](https://www.youtube.com/watch?v=RRdc9DhwrT4)
 
 [AWS User Group Kansas City](http://awskc.com) December, 2022
