@@ -19,7 +19,7 @@ html {
 
 body {
   background: $white;
-  font: 18px/1.4 'Raleway';
+  font: 18px/1.4 'sans-serif';
   color: $primary;
 }
 
@@ -31,7 +31,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Raleway';
+  font-family: 'sans-serif';
   color: $primary;
   font-weight: bold;
 
@@ -217,6 +217,7 @@ img {
   color: $primary;
   cursor: pointer;
   font-family: 'Raleway';
+  font-variant-numeric: lining-nums;
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 1px;
@@ -236,6 +237,7 @@ nav {
   float: right;
   margin-top: 23px; // @TODO: Vertically middle align
   font-family: 'Raleway';
+  font-variant-numeric: lining-nums;
   font-size: 18px;
 
   @include mobile {
@@ -323,9 +325,8 @@ td {
 }
 
 body {
-    font-family: 'Raleway';
+    font-family: 'sans-serif';
     color: #ffffff;
-    font-variant-numeric: lining-nums;
 }
 
 a {
@@ -494,6 +495,11 @@ footer * a:visited {
     height: 20px;
     margin-top: -5px;
 }
+
+pre code {
+  text-wrap: nowrap;
+}
+
 @media screen and (min-width: 768px) {
     .header-nav a {
         margin: 20px 20px;
