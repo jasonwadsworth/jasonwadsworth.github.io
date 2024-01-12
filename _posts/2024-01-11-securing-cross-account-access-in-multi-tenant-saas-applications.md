@@ -13,19 +13,23 @@ If you’re building a SaaS solution, it’s critically important that you prote
 
 AWS recommends using the [AWS Security Token Service (STS) API](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) to make calls to get [temporary credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) for this type of cross-account access. This API leverages [AWS Identity and Access Management (IAM)](https://docs.aws.amazon.com/iam/) roles to provide access between AWS accounts.
 
-But what are you doing to make sure these roles are only being used to connect the correct tenant accounts? In this blog, we examine methods of securing cross-account access using STS to ensure our customers' data is secure and isolated.
+But what are you doing to make sure these roles are only being used to connect the correct tenant accounts? In a multi-tenant application, there are two primary concerns for protecting your tenants' accounts; the potential for one tenant, a bad actor, to use the information of another tenant to gain access to that tenant's data using your application, and your own mistakes. In this blog, we examine methods of securing cross-account access using STS to ensure our customers' data is secure and isolated.
 
-## Challenges of Assuming Cross-Account Roles
+## Protection From Bad Actors - The Confused Deputy Problem
 
-In a multi-tenant application, you have to be aware of the potential for one tenant to use the information of another tenant to gain access to that tenant's data, using your application. AWS best practices have a solution to this problem, known as the [Confused Deputy problem](https://aws.amazon.com/blogs/apn/securely-using-external-id-for-accessing-aws-accounts-owned-by-others/). You can read the details in the linked article, but the short version of it is for you, the SaaS provider, to generate the external ID for your customers and have them add that ID to the assume role policy of the role you are going to assume. If a tenant attempts to use a role for an account they don't own your application will fail to assume that role because the external ID you send won't match the one the real customer put in their assume role policy.  As long as your application controls the external ID, and you are making sure the ID is unique, you can be sure one tenant can't maliciously use another tenant's role to access data that doesn't belong to them.
+When your application needs to access data in your tenants' accounts, you use the [Assume Role API](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) to get temporary credentials. Without some extra protection, this opens the door for a bad actor to take advantage of the [Confused Deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html). I won't go into the problem in detail here, but stated simply, it allows one tenant to access another tenants data simply by knowing the ARN of the role in the other tenant's account. AWS has a solution to combat this problem — the use of an `ExternalId`. There is a [great post from AWS](https://aws.amazon.com/blogs/apn/securely-using-external-id-for-accessing-aws-accounts-owned-by-others/) about how to implement this in your application. One important element to this is that you, the SaaS provider, need to supply the `ExternalId` and make sure it is a unique value in your application. By being the owner of the ID you can be sure that a second tenant cannot use the same ID in their tenant. When a tenant adds an AWS account to your application they must take the ID you supplied and include it in the assume role policy for the role they want to assume. This makes sure the tenant has access to that role.
 
-In a SaaS application, I like to take things a step further. Keeping bad actors at bay is important, and following AWS best practices for security will help with that, but what about your application itself? I have a saying -- "if your idea of data protection is a where clause in SQL, you aren't protecting my data."
+## Protection From Yourself - The Bad Code Problem
 
-What do I mean by that? Well, consider the most extreme example. What if, for some reason, your application has a hard-coded value for what tenant to access? Your customer goes to view some data and, instead of seeing their data, they see the data of the tenant hard-coded into your application. This example is extreme, but it's also not unheard of. How often have engineers edited code while debugging a problem and forgotten to revert that change? And what about the missing where clause that someone doesn't notice while testing because of flaws in the test data? There are several ways that code can do something you didn't intend. It's important that you plan for this and make sure that bad code doesn't lead to leaked data.
+I have a saying — "if your idea of data protection is a where clause in SQL, you aren't protecting my data." That saying doesn't translate perfectly well to this subject, but the point is that you can't rely on your code to protect your tenants' data. You need something more; something that makes sure bad code doesn't lead to a break in isolation.
 
-I talk about how to do this with data in my blog post on [Multi-tenant Security Implementation](https://jason.wadsworth.dev/multi-tenant-security-implementation/). In it, I give an example of how we generate temporary credentials for each tenant, by assuming a role in _our_ account and using dynamic policies, to access each tenant's data, rather than using the permissions of the Lambda. By doing this we can be sure that bad code doesn't lead to an issue because the bad code would fail if the tenant in the code didn't match the tenant in the temporary credentials. The  example in that blog is for getting data from a DynamoDB table. For DynamoDB, we use the `dynamodb:LeadingKeys` condition to be sure the partition key includes the tenant's ID. We need a way to do something similar when assuming a customer's role.
+As much as we try to avoid it, mistakes happen when writing code. We have processes in place to help avoid the mistakes — code reviews, automated tests — but we can't eliminate them entirely. We can, however, plan for them and build a system that fails safely. I talk about this subject a lot, but it's typically talking about things like DynamoDB or S3 data. Data that you, the SaaS provider control. It turns out we can leverage the same sort of techniques to be sure we don't accidentally assume a role for the wrong tenant.
 
-To do this, we take advantage of the `iam:ResourceTag` condition. This condition allows you to require that the role being assumed includes a tag with a specific value. For our example, we'll call the tag MyApplicationTenantId. The condition will require that the role being assumed is tagged with a tag called MyApplicationTenantId and a value of that tenant's ID in our application. It looks something like this:
+First, let's talk a bit about what the problem is we are trying to solve. Imagine the worst-case scenario where there is hard-coded data in your application that makes its way to production. This hard-coded data uses a single tenant's role ARN and external ID to make calls into their AWS account. Now all your tenants are seeing that one tenant's data. While this example is extreme, there are less extreme ways to have the same, or similar, results. What we need is a way that even bad code can't lead to a break in isolation.
+
+If you've heard me speak on the subject, or have read my blog post on [Multi-tenant Security Implementation](https://jason.wadsworth.dev/multi-tenant-security-implementation/), you know that we don't give our code (typically running in Lambda) permission to access tenant data. Instead, we pass in credentials that are used to access the data. These credentials are created using a dynamic policy that limits access to only that tenant's data. We'll do the same thing here, but instead of accessing data, we'll limit the ability to call the Assume Role API for the specific tenant's role.
+
+To do this, we take advantage of the `iam:ResourceTag` condition. This condition allows you to require that the role being assumed includes a tag with a specific value. For our example, we'll call the tag MyApplicationTenantId. The condition will require that the role being assumed is tagged with a tag called MyApplicationTenantId and a value of that tenant's ID in our application. The dynamic policy looks something like this:
 
 ```TypeScript
 {
@@ -48,7 +52,7 @@ When the customer creates the role in their AWS account they include the tag `My
 
 If you're familiar with the [Assume Role API](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) you may be aware of some of its limits, particularly as it relates to [role chaining](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-role-chaining). Role chaining, simply put, is assuming one role and then using those credentials to assume another role. There are other limitations to be aware of if you are going to use role chaining but one that is important to our scenario is that role chaining requires that you have permission to [set the source identity](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html) when calling the API. This permission must exist on both the assume role policy document of the role being assumed as well as the permissions of the role doing the assuming. So for our code to work, we need to add a couple of things.
 
-First, we need to add permissions to the assume role policy document. The full policy will look something like this:
+First, we need to add permissions to the assume role policy document on the role we are assuming. The full policy will look something like this:
 
 ```JSON
 {
@@ -62,7 +66,7 @@ First, we need to add permissions to the assume role policy document. The full p
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                    "sts:ExternalId": "my-not-so-secret-external-id"
+                    "sts:ExternalId": "my-application-provided-external-id"
                 }
             }
         },
@@ -79,7 +83,7 @@ First, we need to add permissions to the assume role policy document. The full p
 
 It's important to note that you can't include the condition statement on `sts:SetSourceIdentity`, but that's okay because it's only used in the context of assuming a role.
 
-We also need to add the `sts:SetSourceIdentity` permission to the role doing the assuming. Our dynamic policy code now looks something like this:
+We also need to add the `sts:SetSourceIdentity` permission to the role doing the assuming. Our dynamic policy now looks something like this:
 
 ```TypeScript
 {
@@ -100,8 +104,8 @@ We also need to add the `sts:SetSourceIdentity` permission to the role doing the
 
 ```
 
-With this in place, you can safely assume your tenants' roles without being concerned you'll get data for the wrong tenant.
+With this in place, you can safely assume your tenants' roles without being concerned you'll get data for the wrong tenant. Even if you have a hard-coded value in your code the permissions of the credentials your code uses won't have permission to assume the role.
 
 ## Conclusion
 
-Building multi-tenant SaaS applications comes with important tenant isolation challenges, especially if you connect your application to customer-owned AWS accounts. Being aware of the potential for your application to be used as an attack vector to your tenants' data is a crucial first step in understanding how to protect it. Making sure you’ve taken all steps to secure cross-account access with solutions like the one I've outlined in this blog helps keep your tenants’ data safe and your application secure.
+Building multi-tenant SaaS applications comes with important tenant isolation challenges, especially if you connect your application to customer-owned AWS accounts. Being aware of the potential for bad actors or bad code to break that isolation is a key step in understanding how to protect against it. Making sure you’ve taken all steps to secure cross-account access with solutions like the one I've outlined in this blog helps keep your tenants’ data safe and your application secure.
