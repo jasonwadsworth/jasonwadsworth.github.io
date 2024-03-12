@@ -8,7 +8,7 @@ Looking for a speaker for your user group or conference? Let me know! I've spoke
 
 ### Upcoming Events
 
-_Nothing right now, but stay tuned_
+[Step Into SaaS - Virtual Presentation](https://cfe.dev/events/step-into-saas/) March 26, 2024 - 12pm Central
 
 ### Past Speaking Engagements
 
