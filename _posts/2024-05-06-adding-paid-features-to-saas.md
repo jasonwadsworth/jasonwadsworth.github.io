@@ -6,8 +6,7 @@ tags:
   - SaaS
 ---
 
-I don't want to waste anyone's time, so if you're here to learn about collecting money this is not the post for you. I'm not going to spend time talking about Stripe, Square, or any other means of collecting money. Frankly, I'm not the right person to talk about those things anyway.
-
+Welcome! This post focuses on implementing feature tiers in SaaS applications, rather than payment processing tools like Stripe or Square. If you're interested in learning about tiers and managing features for different customer levels, read on!
 
 If you are still here, great! Let's get into what I am going to talk about.
 
@@ -33,15 +32,17 @@ Whether you're adding a lower tier to increase the number of users or adding a p
 
 ### Learning
 
-One thing that is often overlooked when considering a free tier is the value of what you can learn by having more users using your app. If you've ever worked in a startup, or just have worked on an app with limited users, you know how challenging it can be to get feedback, and then to understand what value to put on the feedback you get. With a small set of users you aren't sure if the request from one or two users is really valuable or just valuable to them. As you increase the number of users in your app you have a chance to hear from a larger audience. That means a bigger sample size and more meaningful data.
+One thing that is often overlooked when considering a free tier is the value of what you can learn by having more users using your app. If you've ever worked in a startup, or just have worked on an app with limited users, you know how challenging it can be to get feedback, and then to understand what value to put on the feedback you get. With a small set of users, you aren't sure if the request from one or two users is really valuable or just valuable to them. As you increase the number of users in your app you have a chance to hear from a larger audience. That means a bigger sample size and more meaningful data.
 
 Keep this one in mind if you are deciding whether or not to hold on to the lower tier(s) of your app.
 
 It's also important to always understand your users. Users at different tiers sometimes have different needs. Be sure to weigh your feedback in light of who you are getting the feedback from and test any hypothesis against all of your user personas.
 
+It's also important to always understand your users. Users at different tiers sometimes have different needs. Be sure to weigh your feedback in light of who you are getting the feedback from and test any hypothesis against all of your user personas.
+
 ### Enablement
 
-One last point I'll make on the "why" is that it can enable you to do things that you can't do for free, or can't do at the price of your current app. Imagine you want to add some cool AI feature to your app. It sounds like a great idea but you quickly realize that giving it away is just too expensive. By adding a new tier you can charge a fee that makes adding that feature an option. This can be true even if you aren't looking to make money; you can price it in a way that at least covers the cost.
+Speaking of understanding user needs, one last point on the "why" of offering tiers is that it can enable you to do things that you can't do for free, or can't do at the price of your current app. Imagine you want to add a cool AI feature to your app. It sounds like a great idea, but you quickly realize that giving it away for free is too expensive. By adding a new tier you can charge a fee that makes adding that feature an option. This can be true even if you aren't looking to make money; you can price it in a way that at least covers the cost.
 
 ## Tier Management
 
@@ -61,7 +62,7 @@ There are, of course, some things you can/should do as well...
 
 ### Do Use 3rd Party Tools
 
-This kind of goes without saying since it's the opposite of the first don't I listed, but it's worth restating and giving some examples. Using tools from third parties means taking advantage of what they have done so you don't have to do that work. This means you are free to build things that make your app special. I like to use feature flag tools for this. Some examples are [LauchDarkly](https://launchdarkly.com/), [Split](https://www.split.io/), and [AWS App Config](https://aws.amazon.com/systems-manager/features/appconfig/). I can't say I've used App Config, but the principles behind all of these are about the same; you pass in some bit of information and it tells you if the thing is on/off. It's a simple way to get tier management without a lot of work. Plus, if you aren't using feature flags in your app already you really should consider them. That's probably worth a blog post of its own.
+This kind of goes without saying since it's the opposite of the first don't I listed, but it's worth restating and giving some examples. Using tools from third parties means taking advantage of what they have done so you don't have to do that work. This means you are free to build things that make your app special. I like to use feature flag tools for this. Some examples are [LaunchDarkly](https://launchdarkly.com/), [Split](https://www.split.io/), and [AWS App Config](https://aws.amazon.com/systems-manager/features/appconfig/). I can't say I've used App Config, but the principles behind all of these are about the same; you pass in some bit of information and it tells you if the thing is on/off. It's a simple way to get tier management without a lot of work. Plus, if you aren't using feature flags in your app already you really should consider them. That's probably worth a blog post of its own.
 
 ### Start With Options That Don't Scale
 
@@ -81,7 +82,7 @@ We've been talking about tiers a lot, but what tiers really are is a collection 
 
 ![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/tier-feature.gif)
 
-Each tier shows you what features are included. Imagine if you want to move a feature from the basic tier to the free tier. If you focus on tiers then you have to go into the code and make that change. That doesn't sound so bad, after all, it's just one feature, so probably just one place in the code. What if you decided to add a whole new tier? Now you have to find every feature throughout the code and make sure the new tier is included in all the right spots. This makes changing tiers difficult and limits your sales and marketing options.
+Each tier shows you what features are included. Imagine if you want to move a feature from the basic tier to the free tier. If you focus on tiers then you have to go into the code and make that change. That doesn't sound so bad, after all, it's just one feature, so just one place in the code. What if you decided to add a whole new tier? Now you have to find every feature throughout the code and make sure the new tier is included in all the right spots. This makes changing tiers difficult and limits your sales and marketing options.
 
 In addition to allowing you to change tiers, taking a feature-based approach allows you to grandfather in users when you make changes, and even do ala-cart sales where individual features are added for particular customers.
 
@@ -105,11 +106,11 @@ I already touched on this a bit; feature flags are a great way to determine what
 
 When you're building a UI that has different levels of permissions it's a good practice to hide things from users that they can't do. This limits confusion and generally creates a better user experience. How many of you have clicked a button in the AWS console only to be given an error message saying you aren't allowed. Not a great experience.
 
-When dealing with tiers and features you want to take a different approach. As we've already said, permissions and features are not the same. When you have a feature that is available to the user at a different tier you want the UI to show that to them. That doesn't mean it should look like you can do something and it will give you an error when you try it. Let's not rebuild the AWS console. But you can grey out a button and show a message when the user hovers over it.
+When dealing with tiers and features you want to take a different approach. As we've already said, permissions and features are not the same. When you have a feature that is available to the user at a different tier you want the UI to show that to them. That doesn't mean it should look like you can do something and it will give you an error when you try it. Let's avoid rebuilding the AWS console experience. But you can grey out a button and show a message when the user hovers over it.
 
 ![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/feature-hint.gif)
 
-Making sure your UI is aware is how you upsell. You have users in the app and they may not even realize what your app can do if they paid you a bit more. Tell them!
+Making sure your UI is aware is how you upsell. You have users in the app who may not realize what additional capabilities your app offers at higher pricing tiers. Tell them!
 
 ## Dealing With Noisy Neighbors
 
@@ -123,9 +124,9 @@ There are things you can do to help.
 
 ![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/rate-limiting.gif)
 
-There is a reason why every API, every service, in AWS has limits. The main reason is because AWS is IaaS/PaaS. Those share the same noisy neighbor problem as a SaaS app. Rate limiting allows you to limit how much any one user or tenant is able to use your system. By controlling the rate at which tenants can use your application you can avoid becoming overwhelmed by a single tenant.
+There is a reason why every API, every service, in AWS has limits. The main reason is that AWS is IaaS/PaaS. Those share the same noisy neighbor problem as a SaaS app. Rate limiting allows you to limit how much any one user or tenant can use your system. By controlling the rate at which tenants can use your application you can avoid becoming overwhelmed by a single tenant.
 
-In AWS one way to achieve this is by utilizing [usage plans](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html) in API Gateway. With a usage plan, you can set the maximum rate for calls with the same API key. The nice thing is that you can have different usage plans so you can have different limits for different tiers. You might want your paid customers to be able to hit your APIs more frequently that the free ones, and usage plans make that easy to do.
+In AWS one way to achieve this is by utilizing [usage plans](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html) in API Gateway. With a usage plan, you can set the maximum rate for calls with the same API key. The nice thing is that you can have different usage plans so you can have different limits for different tiers. You might want your paid customers to be able to hit your APIs more frequently than the free ones, and usage plans make that easy to do.
 
 If you aren't using API Gateway (REST API to be specific) your options are a bit more limited. You can get some benefit from [WAF](https://aws.amazon.com/waf/), though it's not really designed to be tenant-based. Still, it can help. Beyond that, you're mostly on your own. Keep in mind that anything you implement in your code is already sharing some amount of resources. Let's just hope AWS decides to add it to other places, like AppSync, in the near future.
 
@@ -153,7 +154,7 @@ No matter how you decide to manage the noisy neighbor problem the one you you re
 
 ## Understanding Your Cost
 
-Even if you aren't adding multiple tiers to your app you really should try to understand the costs of each tenant/user. When you're considering adding tiers, either up or down stream, this information is crucial in understanding how much to charge and what features belong in what tier.
+Even if you aren't adding multiple tiers to your app you really should try to understand the costs of each tenant/user. When you're considering adding tiers, either up or downstream, this information is crucial in understanding how much to charge and what features belong in what tier.
 
 ### Custom Metrics
 
@@ -177,4 +178,4 @@ There are so many things to think about as you make decisions about adding tiers
 - Don’t forget about your neighbors
 - Always be aware of cost
 
-If you want to hear some more thoughts on this topic check out the presentation I recently did on this subject. There was a lot of great discussion that followed the presentation.
+If you want to hear some more thoughts on this topic check out the [presentation](https://www.youtube.com/watch?v=x0F9I8tuKNY) I recently did on this subject with the [#BelieveInServerless](https://believeinserverless.com) group. There was a lot of great discussion that followed the presentation.
