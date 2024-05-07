@@ -80,7 +80,7 @@ At some point, you have to start putting something in the code. Here are some th
 
 We've been talking about tiers a lot, but what tiers really are is a collection of features. When you are adding features to your code you should mostly be thinking in terms of those features, not the tiers themselves. We've all seen pages that look something like the following:
 
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/tier-feature.gif)
+![Tiers and Features](https://jason.wadsworth.dev/images/2024-05-06/tier-feature.gif)
 
 Each tier shows you what features are included. Imagine if you want to move a feature from the basic tier to the free tier. If you focus on tiers then you have to go into the code and make that change. That doesn't sound so bad, after all, it's just one feature, so just one place in the code. What if you decided to add a whole new tier? Now you have to find every feature throughout the code and make sure the new tier is included in all the right spots. This makes changing tiers difficult and limits your sales and marketing options.
 
@@ -90,7 +90,7 @@ In addition to allowing you to change tiers, taking a feature-based approach all
 
 There is some crossover between permissions and features, so it's easy to think they can be seen as the same. Both may result in a 403 - forbidden response from an HTTP call, after all. While they do have things in common, they are different.
 
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/permissions-features.png)
+![Permissions and Features Venn Diagram](https://jason.wadsworth.dev/images/2024-05-06/permissions-features.png)
 
 Permissions will often go beyond the high-level "can you access this feature?" and into object-level permissions. A user may be allowed to access the files feature, but may only be able to see certain files.
 
@@ -100,7 +100,7 @@ Features, on the other hand, will often go into application flow. You may have p
 
 I already touched on this a bit; feature flags are a great way to determine what features a user/tenant can access. The code snippet below shows a quick example of what it might look like to evaluate whether a user can access a particular API. In this example, we have a Lambda function that is being called by AppSync. Our AppSync is using a custom authorizer where we are adding the `tenantId` and `userId` to the `resolverContext`. All the code does is make a call to the feature flag service to determine the flag value for the given context. We use the `userId` as the key, but the important data point here is the `tenantId`. That's the value that we'll have rules for to determine whether the value is true or false. If it's false we'll simply throw an error and we're done. If it's true then it does what it would normally do. Again, keep it simple to start with. Many of the feature flag tools have capabilities beyond simple true/false evaluation, but that's all you need to get started.
 
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/feature-flag-code.png)
+![Feature Flag Code Example](https://jason.wadsworth.dev/images/2024-05-06/feature-flag-code.png)
 
 ### Make Sure the UI is Aware
 
@@ -108,13 +108,11 @@ When you're building a UI that has different levels of permissions it's a good p
 
 When dealing with tiers and features you want to take a different approach. As we've already said, permissions and features are not the same. When you have a feature that is available to the user at a different tier you want the UI to show that to them. That doesn't mean it should look like you can do something and it will give you an error when you try it. Let's avoid rebuilding the AWS console experience. But you can grey out a button and show a message when the user hovers over it.
 
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/feature-hint.gif)
+![Feature Hint in UI](https://jason.wadsworth.dev/images/2024-05-06/feature-hint.png)
 
 Making sure your UI is aware is how you upsell. You have users in the app who may not realize what additional capabilities your app offers at higher pricing tiers. Tell them!
 
 ## Dealing With Noisy Neighbors
-
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/noisy-neighbor.jpg)
 
 When you build a SaaS application you're most often hoping to get some cost benefits from having your different tenants share resources. This creates the opportunity for what is referred to as the noisy neighbor problem. It happens when one tenant is impacted by or is impacting other tenants. In a multi-tier application, this can happen in several ways, and its impact can be made worse when paid customers feel like the free-tier tenants are causing the system to slow down. This is particularly noticeable if you add a free tier and suddenly everything is worse.
 
@@ -122,7 +120,7 @@ There are things you can do to help.
 
 ### Rate Limiting
 
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/rate-limiting.gif)
+![Rate Limiting](https://jason.wadsworth.dev/images/2024-05-06/rate-limiting.gif)
 
 There is a reason why every API, every service, in AWS has limits. The main reason is that AWS is IaaS/PaaS. Those share the same noisy neighbor problem as a SaaS app. Rate limiting allows you to limit how much any one user or tenant can use your system. By controlling the rate at which tenants can use your application you can avoid becoming overwhelmed by a single tenant.
 
@@ -132,7 +130,7 @@ If you aren't using API Gateway (REST API to be specific) your options are a bit
 
 ### Segmented Queues
 
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/segmented-queues.gif)
+![Segmented Queues](https://jason.wadsworth.dev/images/2024-05-06/segmented-queues.gif)
 
 If you've ever gone to an amusement park you've seen how queues work. You stand in line and wait for your turn. In a SaaS application, you may want to have your paid customers going through a different queue than your free customers. Think of this like the fast pass at an amusement park. The fast pass is still a queue. It goes to the same ride. It just has fewer people in it, so you get your turn faster. You can do the same thing by sending your data to different queues, one for the free tier and one for the paid. The great thing about this is that the same Lambda function is used by both. And because you can set the concurrency at the integration you can have each queue processing messages at different speeds. You can even go so far as to set up a queue for a single tenant.
 
@@ -146,7 +144,7 @@ Second, tenants are, hopefully, moving between tiers (hopefully going from free 
 
 Instead of separating by tier, I like to do a weighted assignment approach. As a new tenant is added to the application the system determines where that tenant should go based on the usage of the current tenants. You can't know how the new tenant is going to behave but you can at least understand how the existing ones do and use that information to decide where to put a new tenant.
 
-![AppSync to Step Functions](https://jason.wadsworth.dev/images/2024-05-06/tenant-partitioning.gif)
+![Tenant Partitioning](https://jason.wadsworth.dev/images/2024-05-06/tenant-partitioning.gif)
 
 ### Monitoring
 
