@@ -8,10 +8,11 @@ Looking for a speaker for your user group or conference? Let me know! I've spoke
 
 ### Upcoming Events
 
-[Step Up Your SaaS Game: Serverless Orchestration and Automation for SaaS - AWS Midwest Community Day](https://www.midwestcommunityday.com/) June 13, 2024
-
+_Nothing scheduled. I'd love to come speak at your event._
 
 ### Past Speaking Engagements
+
+[Step Up Your SaaS Game: Serverless Orchestration and Automation for SaaS - AWS Midwest Community Day](https://www.youtube.com/watch?v=GcsBNYqSQKA) June 13, 2024
 
 [How to Add Paid Features to Your Serverless Apps - #BelieveInServerless](https://www.youtube.com/watch?v=x0F9I8tuKNY) April, 2024
 
