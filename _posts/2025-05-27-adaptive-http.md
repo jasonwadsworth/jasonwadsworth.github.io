@@ -19,7 +19,7 @@ You have a Node.js application, and you want to serve it efficiently:
 
 At a high level, this setup looks like:
 
-![Adaptive HTTP]({{ site.baseurl }}/images/20125-05-27/adaptive-http.png)
+![Adaptive HTTP]({{ site.baseurl }}/images/2025-05-27/adaptive-http.png)
 
 A separate Lambda controller function monitors traffic (via CloudWatch alarms) and adjusts the system accordingly.
 
