@@ -8,7 +8,9 @@ Looking for a speaker for your user group or conference? Let me know! I've spoke
 
 ### Upcoming Events
 
-_Nothing scheduled. I'd love to come speak at your event._
+Catch me online about every other week on [Box Turtle Bytes](https://boxturtlebytes.com)
+
+_No speaking engagements scheduled. I'd love to come speak at your event._
 
 ### Past Speaking Engagements
 

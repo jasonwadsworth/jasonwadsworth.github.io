@@ -15,3 +15,6 @@ I play in a lot of spaces, but my passion is helping teams build great products 
 ### Contact me
 
 [jasonwadsworth@outlook.com](mailto:jasonwadsworth@outlook.com)
+
+### Check out my live stream with TJ Klug
+[Box Turtle Bytes](https://boxturtlebytes.com)
