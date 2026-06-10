@@ -1,4 +1,12 @@
-# Adaptable Infrastructure on AWS: Combining ECS and Lambda Behind an ALB
+---
+layout: post
+title: "Adaptable Infrastructure on AWS: Combining ECS and Lambda Behind an ALB"
+tags:
+  - aws
+  - serverless
+  - Lambda
+  - ECS
+---
 
 I recently attended a session given by [Allen Helton (AWS Hero)](https://www.readysetcloud.io/blog/) on the past and future of IaC (infrastructure as code). In it he talked about a future where the infrastructure was more adaptive, allowing you to write code once and have it modify how it runs automatically. This brought me back to something I did about 7 years ago, where I had the same code running in both a container and in Lambda. It wasn't quite what Allen was talking about because it was a deploy time decision as to how it would run. That got me thinking about what it would take to make something like that work automatically. In this post, I’ll walk through an architecture that leverages both Amazon ECS and AWS Lambda behind a single Application Load Balancer (ALB), enabling you to dynamically shift traffic and infrastructure depending on usage patterns, all while running the same Node.js/Express codebase. I don't believe this is the end state that Allen was speaking of - I believe it needs to be easier and more automated (less code the developers have to write) - but I think this is an interesting start down that path.
 
