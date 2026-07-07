@@ -358,9 +358,10 @@ footer * a:visited {
 }
 
 // The bundled social icons carry fixed brand fills (some near-black);
-// normalize them to a light monochrome that reads on the dark footer.
+// invert-and-tint keeps the glyph/background contrast inside each icon
+// while landing them all in the site's lavender range.
 footer .svg-icon {
-    filter: grayscale(1) brightness(0) invert(0.72) sepia(0.12) hue-rotate(215deg);
+    filter: grayscale(1) invert(0.9) sepia(0.25) hue-rotate(215deg) saturate(1.6);
     opacity: 0.85;
 
     &:hover {
