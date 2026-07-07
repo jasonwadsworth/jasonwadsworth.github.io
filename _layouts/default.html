@@ -14,7 +14,14 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.typekit.net/egl4kql.css">
+    <meta name="theme-color" content="#140f1e">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23231636'/%3E%3Ctext x='16' y='22' font-family='Georgia, serif' font-size='15' font-style='italic' fill='%23ff3d8a' text-anchor='middle'%3EJW%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}"
         href="{{ site.baseurl }}/feed.xml" />
@@ -44,6 +51,7 @@
                             <a href="{{ site.baseurl }}/">Blog</a>
                             <a href="{{ site.baseurl }}/speaking">Speaking</a>
                             <a href="{{ site.baseurl }}/about">About</a>
+                            <a href="https://jwadsworth.com/">Consulting</a>
                         </nav>
                     </div>
                 </div>
@@ -93,7 +101,10 @@
                     {% include svg-icons.html %}
                 </div>
                 <div class="col-xs-12 col-md-4 copyright">
-                    Copyright 2024, Jason Wadsworth
+                    Copyright {{ 'now' | date: "%Y" }}, Jason Wadsworth
+                </div>
+                <div class="col-xs-12 col-md-4 consulting-link">
+                    <a href="https://jwadsworth.com/">Consulting · jwadsworth.com</a>
                 </div>
             </footer>
         </div>

@@ -12,9 +12,13 @@ I'm also a big Microsoft guy. I have used MS tools since the Visual Basic 4 days
 
 I play in a lot of spaces, but my passion is helping teams build great products at a fast pace. I am a huge believer in DevOps and modern Agile (I think of them as one).
 
+### Work with me
+
+I consult independently through [Jason Wadsworth LLC](https://jwadsworth.com/) — cloud architecture, hands-on development on AWS, engineering advisory, and [fractional CTO](https://jwadsworth.com/fractional-cto/) engagements. If you're building something and could use the help, [I'd love to hear about it](https://jwadsworth.com/#contact).
+
 ### Contact me
 
-[jasonwadsworth@outlook.com](mailto:jasonwadsworth@outlook.com)
+[jason@jwadsworth.com](mailto:jason@jwadsworth.com)
 
 ### Check out my live stream with TJ Klug
 [Box Turtle Bytes](https://boxturtlebytes.com)

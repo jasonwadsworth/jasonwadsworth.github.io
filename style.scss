@@ -18,9 +18,11 @@ html {
 }
 
 body {
-  background: $white;
-  font: 18px/1.4 'sans-serif';
-  color: $primary;
+  background: $bg;
+  font: 17px/1.7 $font-body;
+  color: $text;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -31,21 +33,22 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'sans-serif';
-  color: $primary;
-  font-weight: bold;
+  font-family: $font-display;
+  color: $text;
+  font-weight: 460;
+  letter-spacing: -0.01em;
 
-  line-height: 1.7;
+  line-height: 1.4;
   margin: 1em 0 15px;
   padding: 0;
 
   @include mobile {
-    line-height: 1.4;
+    line-height: 1.3;
   }
 }
 
 h1 {
-  font-size: 36px;
+  font-size: 34px;
   a {
     color: inherit;
   }
@@ -53,16 +56,16 @@ h1 {
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 26px;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 21px;
 }
 
 h4 {
   font-size: 18px;
-  color: $tertiary;
+  color: $text-muted;
 }
 
 p {
@@ -70,11 +73,11 @@ p {
 }
 
 a {
-  color: $accent;
+  color: $purple-bright;
   text-decoration: none;
-	cursor: pointer;
+  cursor: pointer;
   &:hover, &:active {
-    color: $accent;
+    color: $purple-hover;
   }
 }
 
@@ -104,7 +107,7 @@ em, i {
 }
 
 strong, b {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 img {
@@ -117,8 +120,10 @@ img {
 }
 
 .date {
-  font-style: italic;
-  color: $secondary;
+  font-family: $font-mono;
+  font-style: normal;
+  font-size: 13px;
+  color: $text-faint;
 }
 
 .small {
@@ -127,12 +132,12 @@ img {
 
 // Specify the color of the selection
 ::-moz-selection {
-  color: $primary;
-  background: $tertiary;
+  color: #1b0a12;
+  background: $pink;
 }
 ::selection {
-  color: $primary;
-  background: $tertiary;
+  color: #1b0a12;
+  background: $pink;
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -152,23 +157,38 @@ img {
 /*********************/
 
 //
-// .masthead
+// header
 //
 
-.wrapper-masthead {
-  margin-bottom: 50px;
+// Thin pink rule above the header — the site's signature accent.
+.header-accent {
+    background-color: $pink;
+    height: 2px;
 }
 
-.masthead {
-  background-image: url('images/home-header-kc-navy-1600x593.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 20px 0;
-  border-bottom: 1px solid $tertiary;
+.header-main {
+    background:
+        radial-gradient(60rem 24rem at 70% -30%, rgba(109, 75, 212, 0.28), transparent 60%),
+        $bg-raised;
+    border-bottom: 1px solid $line;
+}
 
-  @include mobile {
-    text-align: center;
-  }
+.header-nav {
+    padding-top: 10px;
+}
+
+.header-nav a {
+    font-family: $font-mono;
+    font-weight: 400;
+    font-size: 13px;
+    font-style: normal;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $text-muted;
+
+    &:hover {
+        color: $text;
+    }
 }
 
 .header-box {
@@ -177,10 +197,23 @@ img {
     margin: auto;
     margin-top: 5px;
     margin-bottom: 40px;
-    border: $accent solid 4px;
+    border: 1px solid $line-strong;
+    border-radius: 12px;
+    background: rgba(20, 15, 30, 0.45);
     line-height: 40px;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
+    color: $text-muted;
+}
+
+.welcome {
+    font-family: $font-display;
+    font-size: 34pt;
+    font-weight: 400;
+    overflow: hidden;
+    text-align: center;
+    color: $text;
+    letter-spacing: -0.01em;
 }
 
 .site-avatar {
@@ -197,68 +230,25 @@ img {
   }
 
   img {
-    border-radius: 5px;
+    border-radius: 8px;
+    border: 1px solid $line-strong;
     max-width: 100px;
   }
 }
 
-.site-info {
-  float: left;
-
-  @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
-  }
+.nav-button {
+    margin-top: -10px;
+    border-radius: 5px;
+    padding: 2px;
+    margin-right: -20px;
 }
 
-.site-name {
-  margin: 0;
-  color: $primary;
-  cursor: pointer;
-  font-family: 'Raleway';
-  font-variant-numeric: lining-nums;
-  font-weight: 300;
-  font-size: 28px;
-  letter-spacing: 1px;
+.nav-button>img {
+    height: 24px;
 }
 
-.site-description {
-  margin: -5px 0 0 0;
-  color: $secondary;
-  font-size: 16px;
-
-  @include mobile {
-    margin: 3px 0;
-  }
-}
-
-nav {
-  float: right;
-  margin-top: 23px; // @TODO: Vertically middle align
-  font-family: 'Raleway';
-  font-variant-numeric: lining-nums;
-  font-size: 18px;
-
-  @include mobile {
-    float: none;
-    margin-top: 9px;
-    display: block;
-    font-size: 16px;
-  }
-
-  a {
-    margin-left: 20px;
-    color: $primary;
-    text-align: right;
-    font-weight: 300;
-    letter-spacing: 1px;
-
-    @include mobile {
-      margin: 0 10px;
-      color: $accent;
-    }
-  }
+.nav-button .icon-bar {
+    background-color: $pink;
 }
 
 //
@@ -267,7 +257,7 @@ nav {
 
 .posts > .post {
   padding-bottom: 2em;
-  border-bottom: 1px solid $tertiary;
+  border-bottom: 1px solid $line;
   text-align: left;
 }
 
@@ -279,10 +269,11 @@ nav {
 .post {
   blockquote {
     margin: 1.8em .8em;
-    border-left: 2px solid $secondary;
+    border-left: 2px solid $pink;
     padding: 0.1em 1em;
-    color: $secondary;
-    font-size: 22px;
+    color: $text;
+    font-family: $font-display;
+    font-size: 21px;
     font-style: italic;
   }
 
@@ -291,168 +282,63 @@ nav {
   }
 
   .read-more {
+    font-family: $font-mono;
     text-transform: uppercase;
-    font-size: 15px;
+    letter-spacing: 0.08em;
+    font-size: 13px;
   }
 }
 
+article {
+    color: $text-muted;
+    font-size: 19px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+article h1, article h2, article h3, article h4 {
+    color: $text;
+}
+
+article * a {
+    color: $purple-bright;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+// Titles are links too, but shouldn't read as inline links.
+article h1 a, article h2 a, article h3 a {
+    text-decoration: none;
+}
+
+article * a:visited {
+    color: $purple-bright;
+}
+
+article * a:hover {
+    color: $purple-hover;
+}
+
+//
+// footer
+//
+
 .wrapper-footer {
   margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $white;
+  border-top: 1px solid $line;
+  background-color: $bg-raised;
 }
 
 footer {
   padding: 20px 0;
   text-align: center;
-}
-
-// Settled on moving the import of syntax highlighting to the bottom of the CSS
-// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
-@import "highlights";
-@import "svg-icons";
-
-th {
-    padding-right: 5px;
-    border: 1px solid $primary;
-}
-
-td {
-    padding-right: 5px;
-    text-align: center;
-    border: 1px solid $primary;
-}
-
-body {
-    font-family: 'sans-serif';
-    color: #ffffff;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    color: $accent;
-    text-decoration: none;
-}
-
-a:visited {
-    color: $accent;
-    text-decoration: none;
-}
-
-.cloud913-primary {
-    color: #1a3a6b;
-}
-
-.cloud913-secondary {
-    color: #2d4566;
-}
-
-.cloud913-tertiary {
-    color: #3d5470;
-}
-
-.cloud913-fourth {
-    color: #4d6987;
-}
-
-.cloud913-fifth {
-    color: #577699;
-}
-
-.cloud913-accent {
-    color: #de713a;
-}
-
-.header-top {
-    background-color: rgb(40, 40, 40);
-    height: 40px;
-}
-
-.header-top>a>img {
-    height: 34px;
-    display: block;
-    margin-left: 3px;
-}
-
-.header-accent {
-    background-color: #de713a;
-    height: 2px;
-}
-
-.header-main {
-    background-image: url('images/home-header-kc-navy-1600x593.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.header-nav {
-    padding-top: 10px;
-}
-
-.header-nav a {
-    font-weight: 200;
-    font-size: 20px;
-    font-style: normal;
-    letter-spacing: 5px;
-    color: #ffffff;
-}
-
-.header-box {
-    text-align: left;
-    padding: 34px;
-    margin: auto;
-    margin-top: 5px;
-    margin-bottom: 40px;
-    border: #de713a solid 4px;
-    line-height: 40px;
-    font-size: 24px;
-    font-weight: 400;
-}
-
-.welcome {
-    font-size: 36pt;
-    font-weight: 600;
-    overflow: hidden;
-    text-align: center;
-}
-
-.welcome-image {
-    height: 40px;
-    margin: -12px 0 0 4px;
-}
-
-article {
-    color: #1a3a6b;
-    font-size: 20px;
-    font-weight: 300;
-    margin-bottom: 40px;
-    margin-top: 30px;
-}
-
-article * a {
-    color: #1a3a6b;
-    text-decoration: underline;
-}
-
-article * a:visited {
-    color: #1a3a6b;
-}
-
-article * a:hover {
-    color: $accent;
-}
-
-footer {
-    color: #577699;
-    font-size: 14px;
+  color: $text-faint;
+  font-size: 14px;
 }
 
 .footer-accent {
-    background-color: #de713a;
+    background-color: $pink;
     height: 2px;
     margin-bottom: 6px;
 }
@@ -468,47 +354,106 @@ footer * a {
 }
 
 footer * a:visited {
-    color: #577699;
+    color: $text-faint;
+}
+
+// The bundled social icons carry fixed brand fills (some near-black);
+// normalize them to a light monochrome that reads on the dark footer.
+footer .svg-icon {
+    filter: grayscale(1) brightness(0) invert(0.72) sepia(0.12) hue-rotate(215deg);
+    opacity: 0.85;
+
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .copyright {
     margin-top: 10px;
 }
 
-.nav-button {
-    margin-top: -10px;
-    border-radius: 5px;
-    padding: 2px;
-    margin-right: -20px;
+.consulting-link {
+    margin-top: 10px;
+
+    a {
+        font-family: $font-mono;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        color: $purple-bright;
+    }
 }
 
-.nav-button>img {
-    height: 24px;
+// Settled on moving the import of syntax highlighting to the bottom of the CSS
+// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
+@import "highlights";
+@import "svg-icons";
+
+/*************/
+/* CODE      */
+/*************/
+
+// Dark treatment for code blocks (token colors come from _highlights.scss).
+.highlight {
+  background-color: $bg-raised;
+  border: 1px solid $line;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 12px 14px;
+  overflow: auto;
 }
 
-.nav-button .icon-bar {
-    background-color: #de713a;
+// Brighten low-contrast comment tokens for the dark background.
+.highlight .c,
+.highlight .cm,
+.highlight .c1 {
+  color: #7d95a0;
 }
 
-.call-913 {
-    height: 20px;
-    margin-top: -5px;
+code {
+  font-family: $font-mono;
+  font-size: 0.9em;
+}
+
+// Inline code gets a subtle chip; fenced blocks keep the .highlight surface.
+code.highlighter-rouge {
+  background: rgba(233, 224, 250, 0.08);
+  border-radius: 4px;
+  padding: 2px 5px;
+  color: $text;
 }
 
 pre code {
   text-wrap: nowrap;
+  background: none;
+  padding: 0;
 }
+
+/*************/
+/* TABLES    */
+/*************/
+
+th {
+    padding: 4px 8px;
+    border: 1px solid $line-strong;
+    font-weight: 600;
+}
+
+td {
+    padding: 4px 8px;
+    text-align: center;
+    border: 1px solid $line;
+    color: $text-muted;
+}
+
+/*************/
+/* RESPONSIVE */
+/*************/
 
 @media screen and (min-width: 768px) {
     .header-nav a {
         margin: 20px 20px;
-        font-weight: 200;
-        font-size: 20px;
-        font-style: normal;
-        letter-spacing: 5px;
-        color: #ffffff;
+        font-size: 14px;
     }
-
 
     .header-box {
         text-align: left;
@@ -518,60 +463,35 @@ pre code {
         margin-right: 60px;
         margin-top: 15px;
         margin-bottom: 50px;
-        border: #de713a solid 4px;
-        line-height: 80px;
-        font-size: 48px;
-        font-weight: 400;
+        line-height: 60px;
+        font-size: 24px;
     }
 
-    .welcome-image {
-        height: 80px;
-        margin: -20px 0 0 4px;
-    }
-
-    article {
-        margin-top: 30px;
-    }
-
-    .call-913 {
-        height: 24px;
-        margin-top: -6px;
+    .welcome {
+        font-size: 44pt;
     }
 }
 
 @media screen and (min-width: 992px) {
     .header-nav a {
         margin: 30px 30px;
-        font-weight: 200;
-        font-size: 30px;
-        font-style: normal;
-        letter-spacing: 5px;
-        color: #ffffff;
+        font-size: 15px;
     }
 
     .header-box {
         text-align: left;
         padding: 80px;
-        padding-top: 120px;
+        padding-top: 100px;
         margin: auto;
         margin-left: 60px;
         margin-right: 60px;
         margin-top: 15px;
-        margin-bottom: 80px;
-        border: #de713a solid 4px;
-        line-height: 80px;
-        font-size: 48px;
-        font-weight: 400;
+        margin-bottom: 60px;
+        line-height: 70px;
+        font-size: 26px;
     }
 
-    .welcome-image {
-        height: 80px;
-        margin: -20px 0 0 4px;
-    }
-
-    article {
-        font-size: 24px;
-        // margin-top: 60px;
-        // margin-bottom: 160px;
+    .welcome {
+        font-size: 52pt;
     }
 }

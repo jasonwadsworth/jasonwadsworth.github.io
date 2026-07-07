@@ -1,12 +1,29 @@
-
 //
 // VARIABLES
 //
 
-// Colors
-$blue: #1a3a6b;
+// Brand palette — shared with jwadsworth.com
+$bg: #140f1e;
+$bg-raised: #1c1430;
+$surface: #221840;
+$line: rgba(233, 224, 250, 0.12);
+$line-strong: rgba(233, 224, 250, 0.22);
 
-// Grays
+$text: #efeaf8;
+$text-muted: #ab9ec7;
+$text-faint: #7c6f9b;
+
+$purple: #6d4bd4;
+$purple-bright: #9d7ef5;
+$purple-hover: #b598ff;
+$pink: #ff3d8a;
+
+// Type — shared with jwadsworth.com
+$font-display: 'Fraunces', Georgia, serif;
+$font-body: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-mono: 'IBM Plex Mono', 'SF Mono', 'Courier New', monospace;
+
+// Grays (legacy)
 $black: #000;
 $darkerGray: #222;
 $darkGray: #333;
@@ -14,12 +31,12 @@ $gray: #666;
 $lightGray: #eee;
 $white: #fff;
 
-$primary: #1a3a6b;
-$secondary: #2d4566;
-$tertiary: #3d5470;
-$accent: #de713a;
-
-
+// Legacy role names, remapped to the shared palette
+$blue: $purple-bright;
+$primary: $text;
+$secondary: $text-muted;
+$tertiary: $text-faint;
+$accent: $purple-bright;
 
 // Mobile breakpoints
 @mixin mobile {
