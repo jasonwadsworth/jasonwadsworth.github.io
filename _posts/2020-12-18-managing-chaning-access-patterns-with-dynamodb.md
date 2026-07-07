@@ -33,7 +33,7 @@ For our example we'll assume the table has a partition key called `PartitionKey`
 
 The only change you need to make to the source table is to turn on Streams, if you haven't already. Be sure to set the stream view type to new and old images. You can do this in the console from the DynamoDB table's overview tab.
 
-![Add Streams to table]({{ site.baseurl }}/images/2020-12-18/add-streams-to-table.png)
+![Add Streams to table]({{ site.baseurl }}/images/2020-12-18/add-streams-to-table.jpeg)
 
 Next you'll need a new table that supports your new access pattern; we'll refer to this as the destination table. Be sure you have your new table provisioned to handle the throughput you'll need. In most cases the write capacity can be set to the same as the source table. You're not really going to be doing any reads from this table right now, so you can set that much lower, but don't forget to adjust it when you start to read from it.
 

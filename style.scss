@@ -114,6 +114,14 @@ img {
   max-width: 100%;
 }
 
+// Many post diagrams are transparent PNGs with dark line-work drawn for
+// the old light theme. A white backing shows only through transparent
+// pixels, so opaque photos are unaffected.
+.entry img {
+  background: $white;
+  border-radius: 8px;
+}
+
 // Fixes images in popup boxes from Google Translate
 .gmnoprint img {
   max-width: none;
